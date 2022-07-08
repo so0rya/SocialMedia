@@ -23,6 +23,22 @@ class Blogs(models.Model):
     liked_by=models.ManyToManyField(User)
     author=models.ForeignKey(User,on_delete=models.CASCADE,related_name="author")
 
+    @property
+    def get_like_count(self):
+        like_count=self.liked_by.all().count()
+        return like_count
+
+    @property
+    def get_liked_user(self):
+        all_likes=self.liked_by.all()
+        users = [user.username for user in all_likes]
+        return users
+
+    @property
+    def get_comments(self):
+        all_comments=self.comments_set.all()
+        return all_comments
+
     def __str__(self):
         return self.title
 

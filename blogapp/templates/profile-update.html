@@ -1,0 +1,18 @@
+{%extends 'base.html'%}
+{%block body_block%}
+
+<div class="container">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4 mt-5">
+            <h1>Update Profile</h1>
+            <form action="" method="post">
+                {%csrf_token%}
+                {{form.as_p}}
+                <input type="Submit">
+            </form>
+        </div>
+        <div class="col-4"></div>
+    </div>
+</div>
+{%endblock%}

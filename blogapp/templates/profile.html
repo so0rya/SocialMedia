@@ -1,11 +1,12 @@
-{%extends 'base.html'%}
-{%block body_block%}
-
-<div class="row">
-    <div class="col-4"></div>
-    <div class="col-4">
-        <div class="card" style="width: 18rem;">
-            <img src="{{request.user.users.profile_pic.url}}" class="card-img-top" alt="...">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+   <div class="card" style="width: 18rem;">
+            <img src="{{request.user.user.profile_pic.url}}" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">{{request.user}}</h5>
                 <p class="card-text">{{request.user.bio}}</p>
@@ -17,10 +18,9 @@
             </ul>
             <div class="card-body">
                 <a href="#" class="card-link">Card link</a>
-                <a href="{%url 'profile-update' request.user.users.id%}" class="card-link">Update Profile</a>
+                <a href="#" class="card-link">Another link</a>
             </div>
         </div>
-    </div>
-    <div class="col-4"></div>
-</div>
-{%endblock%}
+
+</body>
+</html>

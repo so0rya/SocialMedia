@@ -1,13 +1,50 @@
-{%extends 'base.html'%}
-
+{%extends 'base1.html'%}
 {%block body_block%}
 <div class="row">
     <div class="col-4"></div>
     <div class="col-4">
-        <h1>Welcone user {{request.user}}</h1>
+        <h1>Welcome user {{request.user}}</h1>
     </div>
     <div class="col-4"></div>
 </div>
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+        <form action="" method="post" enctype="multipart/form-data">
+            {%csrf_token%}
+            {{form.as_p}}
+            <input type="submit" value="post">
+        </form>
+    </div>
+    <div class="col-4"></div>
+</div>
+{%for blog in blogs%}
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+        <p>{{blog.title}}</p>
+        {%if blog.image%}
+        <img src="{{blog.image.url}}" class="img-fluid" alt="...">
+        <p>posted_by {{blog.author}}</p>
+        <p>created_at {{blog.posted_date}}</p>
+        <form action="{%url 'add-comment' blog.id%}" method="post">
+            {%csrf_token%}
+            {{comment_form.as_p}}
+            <input type="submit" class="btn btn-info" value="add comment">
+        </form>
+        <a href="{%url 'add-like' blog.id%}" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>
+                     Like
+            {{blog.get_like_count}}
+                </a>
+        {{blog.get_liked_user}}
+        {%for comment in blog.get_comments%}
+        <div>{{comment.comment}}</div>
+        Commented By - {{comment.user}}
+        {%endfor%}
+        {%endif%}
 
-
+    </div>
+    <div class="col-4"></div>
+</div>
+{%endfor%}
 {%endblock%}
