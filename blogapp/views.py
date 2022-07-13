@@ -132,3 +132,4 @@ def add_like(request,*args,**kwargs):
     blog.save()
     messages.success(request,"like added")
     return redirect("home")
+
