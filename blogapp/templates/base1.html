@@ -108,6 +108,16 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
                     <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i>{{request.user.users.phone}}</p>
                     <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i>{{request.user.users.date_of_birth}}
                     </p>
+                    {%for user in request.user.users.fetch_followings%}
+                    {{user}}
+                    {%endfor%}
+                    {{request.user.users.fetch_following_count}}
+                    {%for user in request.user.users.get_invitations%}
+                    {{user.user.username}}
+                    {%endfor%}
+                    My Followers
+                    {{request.user.users.get_followers}}
+                    <p></p>
                 </div>
             </div>
             <br>

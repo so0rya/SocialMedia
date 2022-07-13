@@ -14,6 +14,32 @@ class UserProfile(models.Model):
     )
     gender=models.CharField(max_length=120,choices=options,default="male")
     user=models.OneToOneField(User,on_delete=models.CASCADE,related_name="users")
+    following=models.ManyToManyField(User,related_name="followings",blank=True)
+
+    @property
+    def fetch_followings(self):
+        return self.following.all()
+
+    @property
+    def fetch_following_count(self):
+        return self.fetch_followings.count()
+
+    @property
+    def get_invitations(self):
+        all_users=UserProfile.objects.all().exclude(user=self.user)
+        following_list=[u for u in self.fetch_followings]
+        invitations=[user for user in all_users if user not in following_list]
+        return invitations
+
+    @property
+    def get_followers(self):
+        all_users=UserProfile.objects.all()
+        followers_list=[]
+        for user in all_users:
+            if self.user in user.fetch_followings:
+                followers_list.append(user)
+        return followers_list
+
 
 class Blogs(models.Model):
     title=models.CharField(max_length=120)
@@ -49,6 +75,8 @@ class Comments(models.Model):
 
     def __str__(self):
         return self.comment
+
+
 
 
 

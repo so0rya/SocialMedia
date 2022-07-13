@@ -23,7 +23,7 @@ class LoginForm(forms.Form):
 class UserProfileForm(ModelForm):
     class Meta:
         model=UserProfile
-        exclude=("user",)
+        exclude=("user","following",)
         widgets={
             "date_of_birth":forms.DateInput(attrs={"class":"form-control","type":"date"})
         }
